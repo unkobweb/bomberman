@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.3.1" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="15" height="13" tilewidth="16" tileheight="16" infinite="0" nextlayerid="2" nextobjectid="1">
+ <tileset firstgid="1" source="pelousedupsg.tsx"/>
+ <tileset firstgid="2" name="Mur centraux" tilewidth="16" tileheight="16" tilecount="1" columns="1">
+  <image source="../tuiles/tile070.png" width="16" height="16"/>
+ </tileset>
+ <tileset firstgid="3" source="Mur droite.tsx"/>
+ <tileset firstgid="4" source="mur de gauche.tsx"/>
+ <tileset firstgid="5" name="mur du bas" tilewidth="16" tileheight="16" tilecount="1" columns="1">
+  <image source="../tuiles/tile070bisbas.png" width="16" height="16"/>
+ </tileset>
+ <tileset firstgid="6" source="angle gauche bas.tsx"/>
+ <tileset firstgid="7" source="anglebasdroit.tsx"/>
+ <tileset firstgid="11" source="anglehautdroit.tsx"/>
+ <tileset firstgid="12" source="anglehautgauche.tsx"/>
+ <tileset firstgid="13" source="mur central pierre.tsx"/>
+ <layer id="1" name="Calque 1" width="15" height="13">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAECuNhYGBgIgNzA/WwADEjGZgZSS8vVD+xNLJeUu1G1kusfTB1yHpH7cUf78hhBQs/YmlkveSEMxswPbGSgdmBegDghTt4DAMAAA==
+  </data>
+ </layer>
+</map>
