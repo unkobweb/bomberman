@@ -33,6 +33,12 @@ public class ObjectsGame extends BasicGame{
 		this.player.init();
 		this.player2.init();
 		this.container.setShowFPS(false);
+		PlayerController controller = new PlayerController(this.player, 2);
+		container.getInput().addKeyListener(controller);
+		container.getInput().addControllerListener(controller);
+		PlayerController controller2 = new PlayerController(this.player2, 3);
+		container.getInput().addKeyListener(controller2);
+		container.getInput().addControllerListener(controller2);
 		
 		/*Music background = new Music("resources/music/music.wav");
 	    background.loop();*/
