@@ -23,7 +23,7 @@ public class Bomb {
 	public void start() {
 		this.map.poserBomb(this.x, this.y);
 		this.started = true;
-		this.start = WindowGame.TIME/1000;
+		this.start = ObjectsGame.TIME/1000;
 	}
 	
 	public void update(int actualTime) {
@@ -43,6 +43,6 @@ public class Bomb {
 	public void clear() {
 		this.map.clearExplosion(this.x, this.y, this.range);
 		this.cleared = true;
-		WindowGame.giveOneBomb(this.player);
+		ObjectsGame.giveOneBomb(this.player);
 	}
 }

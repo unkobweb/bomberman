@@ -65,8 +65,20 @@ public class Map {
 	    int tuileY = (int) y / tileH;
 	    int logicLayer = this.map.getLayerIndex("mur");
 	    this.map.setTileId(tuileX, tuileY, logicLayer, 4);
-		//System.out.println("Map : "+WindowGame.TIME/1000);
+		//System.out.println("Map : "+ObjectsGame.TIME/1000);
 		//this.map.setTileId(tuileX, tuileY, logicLayer, 5);
+	}
+	
+	public boolean isDead(float x, float y) {
+		int tileW = this.map.getTileWidth();
+	    int tileH = this.map.getTileHeight();
+	    int logicLayer = this.map.getLayerIndex("mur");
+	    Image tile = this.map.getTileImage((int) x / tileW, (int) y / tileH, logicLayer);
+	    if (tile != null && tile.getResourceReference().equalsIgnoreCase("resources/map/../tuiles/explode.png")) {
+	    	return true;
+	    } else {
+	    	return false;
+	    }
 	}
 	
 	public void exploserBomb(float x, float y, int range) {

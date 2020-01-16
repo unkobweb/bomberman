@@ -7,12 +7,15 @@ import org.newdawn.slick.SpriteSheet;
 
 public class Player {
 	private float x, y;
+	private float baseX, baseY;
 	private int direction = 2;
 	private boolean moving = false;
 	private Animation[] animations = new Animation[8];
 	private int nombreBombe = 1;
 	private int numero;
 	public boolean onBomb = false;
+	private boolean dead = false;
+	private int deadTime = 0;
 	
 	private int timerBomb = 3;
 	private int rangeBomb = 2;
@@ -23,6 +26,8 @@ public class Player {
 		this.map = map;
 		this.x = x;
 		this.y = y;
+		this.baseX = x;
+		this.baseY = y;
 		this.numero = numero;
 	}
 	
@@ -54,7 +59,9 @@ public class Player {
 	public void render(Graphics g) throws SlickException {
 		/*g.setColor(new Color(0, 0, 0, .5f));
 		g.fillOval((int) x - 16, (int) y - 8, 32, 16);*/
-		g.drawAnimation(animations[direction + (moving ? 4 : 0)], x-10, y-25);
+		if (!this.dead) {
+			g.drawAnimation(animations[direction + (moving ? 4 : 0)], x-10, y-25);
+		}
 	}
 	
 	public void update(int delta) {
@@ -74,6 +81,19 @@ public class Player {
 	        	}
 	        }
 	    }
+		if (!this.dead && this.map.isDead(this.x, this.y)) {
+			this.dead = true;
+			this.deadTime = ObjectsGame.TIME;
+			this.x = 1;
+			this.y = 1;
+		}
+		if (this.dead && this.deadTime + 3000 <= ObjectsGame.TIME ) {
+			this.dead = false;
+			this.deadTime = 0;
+			this.x = this.baseX;
+			this.y = this.baseY;
+			this.direction = 2;
+		}
 	}
 	
 	private float getFuturX(int delta) {
@@ -95,11 +115,11 @@ public class Player {
 	}
 	
 	public void poserBombe() {
-		if (this.nombreBombe > 0) {
+		if (this.nombreBombe > 0 && !this.dead) {
 			this.nombreBombe--;
 			Bomb b = new Bomb(this.x, this.y, this.timerBomb, this.rangeBomb, map, this.numero);
 			b.start();
-			WindowGame.addBomb(b);
+			ObjectsGame.addBomb(b);
 			if (this.map.isOnBomb(this.x, this.y)) {
 				this.onBomb = true;
 			} else {
