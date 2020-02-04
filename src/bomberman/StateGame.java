@@ -23,5 +23,4 @@ public class StateGame extends StateBasedGame {
         addState(new MapGameState());
         addState(new OptionScreen());
     }
-
 }
