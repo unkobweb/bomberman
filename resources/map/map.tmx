@@ -6,6 +6,9 @@
  <tileset firstgid="4" source="bomb.tsx"/>
  <tileset firstgid="5" source="explode.tsx"/>
  <tileset firstgid="6" source="brick.tsx"/>
+ <tileset firstgid="7" source="itemBomb.tsx"/>
+ <tileset firstgid="8" source="itemSpeed.tsx"/>
+ <tileset firstgid="9" source="itemRange.tsx"/>
  <layer id="1" name="terre" width="15" height="13">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAECmNmYGBgHsWjYTCaBhgAxnbbHwwDAAA=

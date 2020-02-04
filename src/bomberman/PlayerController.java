@@ -27,7 +27,6 @@ public class PlayerController implements KeyListener, ControllerListener {
 
 	@Override
 	public void keyPressed(int key, char c) {
-		System.out.println(key);
 		switch (key) {
 		case Input.KEY_UP: 			this.player.setDirection(0); this.player.setMoving(true); break;
 		case Input.KEY_LEFT: 		this.player.setDirection(1); this.player.setMoving(true); break;

@@ -16,9 +16,11 @@ public class Player {
 	public boolean onBomb = false;
 	private boolean dead = false;
 	private int deadTime = 0;
+	private int numberOfDeath = 0;
 	
 	private int timerBomb = 3;
 	private int rangeBomb = 2;
+	private int speed = 0;
 	
 	private Map map;
 	
@@ -33,6 +35,16 @@ public class Player {
 	
 	public void addBomb() {
 		this.nombreBombe++;
+	}
+	
+	public void addRange() {
+		this.rangeBomb++;
+	}
+	
+	public void addSpeed() {
+		if (this.speed < 4) {
+			this.speed++;
+		}
 	}
 	
 	public void init() throws SlickException {
@@ -68,7 +80,7 @@ public class Player {
 		if (this.moving) {
 	        float futurX = getFuturX(delta);
 	        float futurY = getFuturY(delta);
-	        boolean collision = this.map.isCollision(futurX, futurY, this.onBomb);
+	        boolean collision = this.map.isCollision(futurX, futurY, this.onBomb, this.numero);
 	        if (collision) {
 	            this.moving = false;
 	        } else {
@@ -83,11 +95,15 @@ public class Player {
 	    }
 		if (!this.dead && this.map.isDead(this.x, this.y)) {
 			this.dead = true;
-			this.deadTime = ObjectsGame.TIME;
+			this.deadTime = MapGameState.TIME;
+			this.numberOfDeath++;
+			if (this.numberOfDeath == 3) {
+				MapGameState.finishGame();
+			}
 			this.x = 1;
 			this.y = 1;
 		}
-		if (this.dead && this.deadTime + 3000 <= ObjectsGame.TIME ) {
+		if (this.dead && this.deadTime + 3000 <= MapGameState.TIME ) {
 			this.dead = false;
 			this.deadTime = 0;
 			this.x = this.baseX;
@@ -99,8 +115,8 @@ public class Player {
 	private float getFuturX(int delta) {
 	    float futurX = this.x;
 	    switch (this.direction) {
-	    case 1: futurX = this.x - .1f * delta; break;
-	    case 3: futurX = this.x + .1f * delta; break;
+	    case 1: futurX = this.x - .1f * (delta+this.speed); break;
+	    case 3: futurX = this.x + .1f * (delta+this.speed); break;
 	    }
 	    return futurX;
 	}
@@ -108,8 +124,8 @@ public class Player {
 	private float getFuturY(int delta) {
 	    float futurY = this.y;
 	    switch (this.direction) {
-	    case 0: futurY = this.y - .1f * delta; break;
-	    case 2: futurY = this.y + .1f * delta; break;
+	    case 0: futurY = this.y - .1f * (delta+this.speed); break;
+	    case 2: futurY = this.y + .1f * (delta+this.speed); break;
 	    }
 	    return futurY;
 	}
@@ -119,7 +135,7 @@ public class Player {
 			this.nombreBombe--;
 			Bomb b = new Bomb(this.x, this.y, this.timerBomb, this.rangeBomb, map, this.numero);
 			b.start();
-			ObjectsGame.addBomb(b);
+			MapGameState.addBomb(b);
 			if (this.map.isOnBomb(this.x, this.y)) {
 				this.onBomb = true;
 			} else {
