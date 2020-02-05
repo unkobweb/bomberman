@@ -33,8 +33,9 @@ public class MainScreenGameState extends BasicGameState {
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
         // TODO Auto-generated method stub
         background.draw(0, 0, container.getWidth(), container.getHeight());
-        g.drawString(choice == 0 ? "> " + "Press F1 to play" : "" + "Press F1 to play", 300, 380);
-        g.drawString(choice == 1 ? "> " + "Press F2 for options" : "" +"Press F2 for options", 300, 410);
+        g.drawString(choice == 0 ? "> " + "Play" : "" + "Play", 355, 360);
+        g.drawString(choice == 1 ? "> " + "Options" : "" +"Options", 355, 390);
+        g.drawString(choice == 3 ? "> " + "Instructions" : "" +"Instructions", 355, 420);
     }
  
     @Override
@@ -44,6 +45,9 @@ public class MainScreenGameState extends BasicGameState {
             game.enterState(2, new FadeOutTransition(), new FadeInTransition());
         }
         if(container.getInput().isKeyPressed(Input.KEY_F2)) {
+            game.enterState(3, new FadeOutTransition(), new FadeInTransition());
+        }
+        if(container.getInput().isKeyPressed(Input.KEY_F3)) {
             game.enterState(3, new FadeOutTransition(), new FadeInTransition());
         }
         if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
