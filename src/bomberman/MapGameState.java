@@ -75,9 +75,12 @@ public class MapGameState extends BasicGameState {
 				listBomb.remove(i);
 			}
 		}
-		if (container.getInput().isKeyPressed(Input.KEY_ESCAPE) || MapGameState.gameFinished || TIME >= 300000) {
+		if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
             game.enterState(1, new FadeOutTransition(), new FadeInTransition());
             
+		}
+		if (MapGameState.gameFinished || TIME >= 300000) {
+            game.enterState(5, new FadeOutTransition(), new FadeInTransition());
 		}
 	}
 	

@@ -22,5 +22,7 @@ public class StateGame extends StateBasedGame {
         addState(new MainScreenGameState());
         addState(new MapGameState());
         addState(new OptionScreen());
+        addState(new Instructions());
+        addState(new EndScreenGame());
     }
 }
