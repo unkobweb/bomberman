@@ -9,12 +9,16 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
+import org.newdawn.slick.ControllerListener;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.KeyListener;
  
 public class MainScreenGameState extends BasicGameState {
    
       public static final int ID = 1;
       private Image background;
       private StateBasedGame game;
+      private int choice = 0;
      
      
     @Override
@@ -29,8 +33,8 @@ public class MainScreenGameState extends BasicGameState {
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
         // TODO Auto-generated method stub
         background.draw(0, 0, container.getWidth(), container.getHeight());
-        g.drawString("Press F1 to play", 300, 380);
-        g.drawString("Press F2 for options", 300, 410);
+        g.drawString(choice == 0 ? "> " + "Press F1 to play" : "" + "Press F1 to play", 300, 380);
+        g.drawString(choice == 1 ? "> " + "Press F2 for options" : "" +"Press F2 for options", 300, 410);
     }
  
     @Override
@@ -63,4 +67,18 @@ public class MainScreenGameState extends BasicGameState {
         // TODO Auto-generated method stub
  
     }
+    
+    @Override
+	public void controllerDownPressed(int controller) {
+    	if (choice > 0) {
+			choice--;
+		}
+	}
+    
+    @Override
+	public void controllerUpPressed(int controller) {
+		if (choice < 1) {
+			choice++;
+		}
+	}
 }

@@ -20,7 +20,7 @@ public class MapGameState extends BasicGameState {
 	private static ArrayList<Bomb> listBomb = new ArrayList<Bomb>();
 	public static int TIME = 0;
 	private Hud hud = new Hud();
-	public static StateBasedGame game;
+	public static boolean gameFinished = false;
 	
 	/*public static void main(String[] args) throws SlickException {
 		new AppGameContainer(new MapGameState(), 640, 480, false).start();
@@ -51,7 +51,7 @@ public class MapGameState extends BasicGameState {
 	}
 	
 	public static void finishGame() {
-		game.enterState(1, new FadeOutTransition(), new FadeInTransition());
+		MapGameState.gameFinished = true;
 	}
 
 	
@@ -75,8 +75,9 @@ public class MapGameState extends BasicGameState {
 				listBomb.remove(i);
 			}
 		}
-		if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
+		if (container.getInput().isKeyPressed(Input.KEY_ESCAPE) || MapGameState.gameFinished) {
             game.enterState(1, new FadeOutTransition(), new FadeInTransition());
+            
 		}
 	}
 	
