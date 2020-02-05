@@ -35,7 +35,7 @@ public class MainScreenGameState extends BasicGameState {
         background.draw(0, 0, container.getWidth(), container.getHeight());
         g.drawString(choice == 0 ? "> " + "Play" : "" + "Play", 355, 360);
         g.drawString(choice == 1 ? "> " + "Options" : "" +"Options", 355, 390);
-        g.drawString(choice == 3 ? "> " + "Instructions" : "" +"Instructions", 355, 420);
+        g.drawString(choice == 2 ? "> " + "Instructions" : "" +"Instructions", 355, 420);
     }
  
     @Override

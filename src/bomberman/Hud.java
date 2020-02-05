@@ -36,6 +36,13 @@ public class Hud {
    
     private static final int S2_X = 500;
     private static final int S2_Y = 500;
+    
+    private static final int SCORE1_X = 10;
+    private static final int SCORE1_Y = 480;
+    
+    private static final int SCORE2_X = 10;
+    private static final int SCORE2_Y = 520;
+   
    
     private Image playerOne;
     private Image playerTwo;
@@ -90,6 +97,8 @@ public class Hud {
       g.drawImage(this.speedTwo, S2_X, S2_Y);
       g.drawString(""+player1.getSpeed(), S2_X + 50, S2_Y + 5);
       g.drawString(Chrono(TIME), TIME_X, TIME_Y);
+      g.drawString(""+player1.getScore(), SCORE1_X, SCORE1_Y);
+      g.drawString(""+player2.getScore(), SCORE2_X, SCORE2_Y);
     }
    
    

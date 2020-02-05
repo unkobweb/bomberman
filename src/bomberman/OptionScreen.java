@@ -17,7 +17,7 @@ public class OptionScreen extends BasicGameState {
       public static final int ID = 3;
       private Image background;
       private StateBasedGame game;
-      private int choice = 0;
+      //private int choice = 0;
 
 
     @Override
