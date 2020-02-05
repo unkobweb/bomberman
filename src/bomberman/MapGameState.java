@@ -60,7 +60,7 @@ public class MapGameState extends BasicGameState {
 		MapGameState.map.render();
 		MapGameState.player.render(g);
 		MapGameState.player2.render(g);
-		this.hud.render(g, this.player, this.player2);
+		this.hud.render(g, this.player, this.player2, TIME);
 	}
 	
 	@Override
@@ -75,7 +75,7 @@ public class MapGameState extends BasicGameState {
 				listBomb.remove(i);
 			}
 		}
-		if (container.getInput().isKeyPressed(Input.KEY_ESCAPE) || MapGameState.gameFinished) {
+		if (container.getInput().isKeyPressed(Input.KEY_ESCAPE) || MapGameState.gameFinished || TIME >= 300000) {
             game.enterState(1, new FadeOutTransition(), new FadeInTransition());
             
 		}

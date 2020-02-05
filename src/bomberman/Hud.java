@@ -3,6 +3,9 @@ package bomberman;
 import org.newdawn.slick.*;
  
 public class Hud {
+	
+	private static final int TIME_X = 10;
+	private static final int TIME_Y = 500; 
  
     private static final int P1_NAME_X = 600;
     private static final int P1_NAME_Y = 10;
@@ -57,9 +60,16 @@ public class Hud {
         this.speedOne = new Image("resources/hud/speed.png");
         this.speedTwo = new Image("resources/hud/speed.png");
     }
+    
+   private String Chrono(int ActualTime) {
+	   int reste = 300 - (ActualTime/1000);
+	   int minute = reste / 60;
+	   int seconde = reste % 60;
+	   return (seconde > 9) ? minute+" : "+seconde : minute+" : "+"0"+seconde;
+   }
  
  
-    public void render(Graphics g, Player player1, Player player2) {
+    public void render(Graphics g, Player player1, Player player2, int TIME) {
       g.resetTransform();
       g.drawImage(this.playerOne, P1_NAME_X, P1_NAME_Y);
       g.drawImage(this.playerTwo, P2_NAME_X, P2_NAME_Y);
@@ -79,6 +89,7 @@ public class Hud {
       g.drawString(""+player1.getSpeed(), S1_X + 50, S1_Y + 5);
       g.drawImage(this.speedTwo, S2_X, S2_Y);
       g.drawString(""+player1.getSpeed(), S2_X + 50, S2_Y + 5);
+      g.drawString(Chrono(TIME), TIME_X, TIME_Y);
     }
    
    
