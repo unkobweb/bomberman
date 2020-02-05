@@ -23,6 +23,8 @@ public class Player {
 	private int rangeBomb = 2;
 	private int speed = 0;
 	
+	private int score = 0;
+	
 	private Map map;
 	
 	public Player(Map map, int x, int y, int numero) {
@@ -32,6 +34,10 @@ public class Player {
 		this.baseX = x;
 		this.baseY = y;
 		this.numero = numero;
+	}
+	
+	public void addScore(int nbScore) {
+		this.score += nbScore;
 	}
 	
 	public int getNbDeath() {
@@ -99,6 +105,7 @@ public class Player {
 	}
 	
 	public void update(int delta) {
+		System.out.println("Score du joueur "+this.numero+" : "+this.score);
 		if (this.moving) {
 	        float futurX = getFuturX(delta);
 	        float futurY = getFuturY(delta);
@@ -117,6 +124,7 @@ public class Player {
 	    }
 		if (!this.dead && this.map.isDead(this.x, this.y)) {
 			this.dead = true;
+			this.score -= 200;
 			this.deadTime = MapGameState.TIME;
 			this.numberOfDeath++;
 			if (this.numberOfDeath == 3) {

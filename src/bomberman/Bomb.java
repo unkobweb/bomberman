@@ -37,7 +37,7 @@ public class Bomb {
 	}
 	
 	public void explode() {
-		this.map.exploserBomb(this.x, this.y, this.range);
+		this.map.exploserBomb(this.x, this.y, this.range, this.player);
 	}
 	
 	public void clear() {

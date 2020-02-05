@@ -89,6 +89,14 @@ public class MapGameState extends BasicGameState {
 		listBomb.add(bomb);
 	}
 	
+	public static void addScore(int score, int numero) {
+		if (numero == 1) {
+			player.addScore(score);
+		} else if (numero == 2) {
+			player2.addScore(score);
+		}
+	}
+	
 	public static void giveOneBomb(int playerNumber) {
 		if (playerNumber == 1) {
 			player.addBomb();

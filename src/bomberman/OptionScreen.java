@@ -17,6 +17,7 @@ public class OptionScreen extends BasicGameState {
       public static final int ID = 3;
       private Image background;
       private StateBasedGame game;
+      private int choice = 0;
 
 
     @Override
@@ -42,10 +43,10 @@ public class OptionScreen extends BasicGameState {
 
     }
 
-      @Override
-      public void keyReleased(int key, char c) {
-        game.enterState(OptionScreen.ID);
-      }
+    @Override
+    public void keyReleased(int key, char c) {
+      game.enterState(OptionScreen.ID);
+    }
 
 
     @Override

@@ -66,14 +66,17 @@ public class Map {
 		    	MapGameState.giveOneMoreBomb(numero);
 		    	this.map.setTileId((int) futurX / tileW, (int) futurY / tileH, logicLayer, 0);
 		    	collision = false;
+		    	MapGameState.addScore(50, numero);
 		    } else if (tileName.equals(itemRange)) {
 		    	MapGameState.giveRange(numero);
 		    	this.map.setTileId((int) futurX / tileW, (int) futurY / tileH, logicLayer, 0);
 		    	collision = false;
+		    	MapGameState.addScore(50, numero);
 		    } else if (tileName.equals(itemSpeed)) {
 		    	MapGameState.giveSpeed(numero);
 		    	this.map.setTileId((int) futurX / tileW, (int) futurY / tileH, logicLayer, 0);
 		    	collision = false;
+		    	MapGameState.addScore(50, numero);
 		    } else {
 		    	collision = tile != null;
 		    }
@@ -111,13 +114,14 @@ public class Map {
 	    }
 	}
 	
-	public void exploserBomb(float x, float y, int range) {
+	public void exploserBomb(float x, float y, int range, int player) {
 		int tileW = this.map.getTileWidth();
 	    int tileH = this.map.getTileHeight();
 	    int tuileX = (int) x / tileW;
 	    int tuileY = (int) y / tileH;
 	    int logicLayer = this.map.getLayerIndex("mur");
 	    this.map.setTileId(tuileX, tuileY, logicLayer, 5);
+	    int nombreBlocsDetruit = 0;
 	    for (int i = 1;i <= range;i++) {
 	    	Image tile = this.map.getTileImage(((int) x / tileW)+i, (int) y / tileH, logicLayer);
 	    	if (tile == null) {
@@ -125,6 +129,7 @@ public class Map {
 	    	} else {
 	    		if (tile.getResourceReference().equalsIgnoreCase("resources/map/../tuiles/Caisse.png")) {
 	    			this.map.setTileId(tuileX+i, tuileY, logicLayer, 5);
+	    			nombreBlocsDetruit++;
 	    		}
 	    		break;
 	    	}
@@ -136,6 +141,7 @@ public class Map {
 	    	} else {
 	    		if (tile.getResourceReference().equalsIgnoreCase("resources/map/../tuiles/Caisse.png")) {
 	    			this.map.setTileId(tuileX-i, tuileY, logicLayer, 5);
+	    			nombreBlocsDetruit++;
 	    		}
 	    		break;
 	    	}
@@ -147,6 +153,7 @@ public class Map {
 	    	} else {
 	    		if (tile.getResourceReference().equalsIgnoreCase("resources/map/../tuiles/Caisse.png")) {
 	    			this.map.setTileId(tuileX, tuileY+i, logicLayer, 5);
+	    			nombreBlocsDetruit++;
 	    		}
 	    		break;
 	    	}
@@ -158,10 +165,13 @@ public class Map {
 	    	} else {
 	    		if (tile.getResourceReference().equalsIgnoreCase("resources/map/../tuiles/Caisse.png")) {
 	    			this.map.setTileId(tuileX, tuileY-i, logicLayer, 5);
+	    			nombreBlocsDetruit++;
 	    		}
 	    		break;
 	    	}
 	    }
+	    MapGameState.addScore((nombreBlocsDetruit * 15), player);
+	    
 	}
 	
 	public void clearExplosion(float x, float y, int range) {
