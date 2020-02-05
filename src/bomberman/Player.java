@@ -8,6 +8,7 @@ import org.newdawn.slick.SpriteSheet;
 public class Player {
 	private float x, y;
 	private float baseX, baseY;
+	private int baseRange, baseNbBomb, baseSpeed;
 	private int direction = 2;
 	private boolean moving = false;
 	private Animation[] animations = new Animation[8];
@@ -33,6 +34,9 @@ public class Player {
 		this.y = y;
 		this.baseX = x;
 		this.baseY = y;
+		this.baseNbBomb = 1;
+		this.baseRange = 2;
+		this.baseSpeed = 0;
 		this.numero = numero;
 	}
 	
@@ -80,6 +84,13 @@ public class Player {
 	}
 	
 	public void init() throws SlickException {
+		this.numberOfDeath = 0;
+		this.nombreBombe = this.baseNbBomb;
+		this.rangeBomb = this.baseRange;
+		this.speed = this.baseSpeed;
+		this.x = this.baseX;
+		this.y = this.baseY;
+		this.score = 0;
 		SpriteSheet deplacement = new SpriteSheet("resources/sprites/deplacement.png",21,33);
 		SpriteSheet stay = new SpriteSheet("resources/sprites/stay.png",20,33);
 		this.animations[2] = loadAnimation(stay,0,3,0);

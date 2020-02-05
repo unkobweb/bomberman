@@ -21,6 +21,7 @@ public class MapGameState extends BasicGameState {
 	public static int TIME = 0;
 	private Hud hud = new Hud();
 	public static boolean gameFinished = false;
+	private boolean goesToScore = false;
 	
 	/*public static void main(String[] args) throws SlickException {
 		new AppGameContainer(new MapGameState(), 640, 480, false).start();
@@ -31,6 +32,8 @@ public class MapGameState extends BasicGameState {
 	}*/
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
+		this.gameFinished = false;
+		this.goesToScore = false;
 		MapGameState.container = container;
 		MapGameState.map.init();
 		MapGameState.player.init();
@@ -54,7 +57,6 @@ public class MapGameState extends BasicGameState {
 		MapGameState.gameFinished = true;
 	}
 
-	
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
 		MapGameState.map.render();
@@ -65,6 +67,9 @@ public class MapGameState extends BasicGameState {
 	
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+		if (this.gameFinished && this.goesToScore) {
+			this.init(container, game);
+		}
 		TIME += delta;
 		//System.out.println(TIME/1000);
 		MapGameState.player.update(delta);
@@ -81,6 +86,7 @@ public class MapGameState extends BasicGameState {
 		}
 		if (MapGameState.gameFinished || TIME >= 300000) {
             game.enterState(5, new FadeOutTransition(), new FadeInTransition());
+            this.goesToScore = true;
 		}
 	}
 	
