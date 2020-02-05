@@ -59,18 +59,26 @@ public class Hud {
     }
  
  
-    public void render(Graphics g) {
+    public void render(Graphics g, Player player1, Player player2) {
       g.resetTransform();
       g.drawImage(this.playerOne, P1_NAME_X, P1_NAME_Y);
       g.drawImage(this.playerTwo, P2_NAME_X, P2_NAME_Y);
       g.drawImage(this.bombOne, B1_X, B1_Y);
+      g.drawString(""+player1.getNbBomb(), B1_X + 50, B1_Y + 5);
       g.drawImage(this.bombTwo, B2_X, B2_Y);
+      g.drawString(""+player2.getNbBomb(), B2_X + 50, B2_Y + 5);
       g.drawImage(this.fireOne, F1_X, F1_Y);
+      g.drawString(""+player1.getNbRange(), F1_X + 50, F1_Y + 5);
       g.drawImage(this.fireTwo, F2_X, F2_Y);
+      g.drawString(""+player2.getNbRange(), F2_X + 50, F2_Y + 5);
       g.drawImage(this.healOne, H1_X, H1_Y);
+      g.drawString(""+(3-player1.getNbDeath()), H1_X + 50, H1_Y + 5);
       g.drawImage(this.healTwo, H2_X, H2_Y);
+      g.drawString(""+(3-player2.getNbDeath()), H2_X + 50, H2_Y + 5);
       g.drawImage(this.speedOne, S1_X, S1_Y);
+      g.drawString(""+player1.getSpeed(), S1_X + 50, S1_Y + 5);
       g.drawImage(this.speedTwo, S2_X, S2_Y);
+      g.drawString(""+player1.getSpeed(), S2_X + 50, S2_Y + 5);
     }
    
    

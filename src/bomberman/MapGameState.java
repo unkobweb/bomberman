@@ -39,11 +39,11 @@ public class MapGameState extends BasicGameState {
 		PlayerController controller = new PlayerController(MapGameState.player, 2);
 		container.getInput().addKeyListener(controller);
 		container.getInput().addControllerListener(controller);
-		//PlayerController controller2 = new PlayerController(MapGameState.player2, 3);
-		//container.getInput().addKeyListener(controller2);
-		//container.getInput().addControllerListener(controller2);
+		PlayerController controller2 = new PlayerController(MapGameState.player2, 3);
+		container.getInput().addKeyListener(controller2);
+		container.getInput().addControllerListener(controller2);
 		MapGameState.container.setShowFPS(false);
-        MapGameState.container.setFullscreen(true);
+        MapGameState.container.setFullscreen(false);
         this.hud.init();
 		
 		/*Music background = new Music("resources/music/music.wav");
@@ -60,7 +60,7 @@ public class MapGameState extends BasicGameState {
 		MapGameState.map.render();
 		MapGameState.player.render(g);
 		MapGameState.player2.render(g);
-		this.hud.render(g);
+		this.hud.render(g, this.player, this.player2);
 	}
 	
 	@Override
@@ -94,6 +94,14 @@ public class MapGameState extends BasicGameState {
 			player.addBomb();
 		} else if (playerNumber == 2){
 			player2.addBomb();
+		}
+	}
+	
+	public static void giveOneMoreBomb(int playerNumber) {
+		if (playerNumber == 1) {
+			player.addMoreBomb();
+		} else if (playerNumber == 2){
+			player2.addMoreBomb();
 		}
 	}
 	

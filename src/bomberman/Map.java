@@ -63,7 +63,7 @@ public class Map {
 		    } else if (onBomb && tileName.equals(bomb)) {
 		    	collision = false;
 		    } else if(tileName.equals(itemBomb)) {
-		    	MapGameState.giveOneBomb(numero);
+		    	MapGameState.giveOneMoreBomb(numero);
 		    	this.map.setTileId((int) futurX / tileW, (int) futurY / tileH, logicLayer, 0);
 		    	collision = false;
 		    } else if (tileName.equals(itemRange)) {

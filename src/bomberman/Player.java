@@ -12,6 +12,7 @@ public class Player {
 	private boolean moving = false;
 	private Animation[] animations = new Animation[8];
 	private int nombreBombe = 1;
+	private int nombreBombeMax = 1;
 	private int numero;
 	public boolean onBomb = false;
 	private boolean dead = false;
@@ -33,7 +34,28 @@ public class Player {
 		this.numero = numero;
 	}
 	
+	public int getNbDeath() {
+		return this.numberOfDeath;
+	}
+	
+	public int getNbBomb() {
+		return this.nombreBombeMax;
+	}
+	
+	public int getNbRange() {
+		return this.rangeBomb;
+	}
+	
+	public int getSpeed() {
+		return this.speed;
+	}
+	
 	public void addBomb() {
+		this.nombreBombe++;
+	}
+	
+	public void addMoreBomb() {
+		this.nombreBombeMax++;
 		this.nombreBombe++;
 	}
 	
