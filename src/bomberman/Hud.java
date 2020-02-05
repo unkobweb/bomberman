@@ -4,7 +4,7 @@ import org.newdawn.slick.*;
  
 public class Hud {
 	
-	private static final int TIME_X = 10;
+	private static final int TIME_X = 215;
 	private static final int TIME_Y = 500; 
  
     private static final int P1_NAME_X = 600;
@@ -37,11 +37,14 @@ public class Hud {
     private static final int S2_X = 500;
     private static final int S2_Y = 500;
     
-    private static final int SCORE1_X = 10;
-    private static final int SCORE1_Y = 480;
+    private static final int SCORE1_X = 650;
+    private static final int SCORE1_Y = 145;
     
-    private static final int SCORE2_X = 10;
-    private static final int SCORE2_Y = 520;
+    private static final int SCORE2_X = 650;
+    private static final int SCORE2_Y = 425;
+    
+    private static final int BANIERE_X = 0;
+    private static final int BANIERE_Y = 416;
    
    
     private Image playerOne;
@@ -54,6 +57,7 @@ public class Hud {
     private Image healTwo;
     private Image speedOne;
     private Image speedTwo;
+    private Image baniere;
    
     public void init() throws SlickException {
         this.playerOne = new Image("resources/hud/player1.png");
@@ -66,6 +70,7 @@ public class Hud {
         this.healTwo = new Image("resources/hud/health.png");
         this.speedOne = new Image("resources/hud/speed.png");
         this.speedTwo = new Image("resources/hud/speed.png");
+        this.baniere = new Image("resources/hud/bomberman_timer.png");
     }
     
    private String Chrono(int ActualTime) {
@@ -97,8 +102,9 @@ public class Hud {
       g.drawImage(this.speedTwo, S2_X, S2_Y);
       g.drawString(""+player1.getSpeed(), S2_X + 50, S2_Y + 5);
       g.drawString(Chrono(TIME), TIME_X, TIME_Y);
-      g.drawString(""+player1.getScore(), SCORE1_X, SCORE1_Y);
-      g.drawString(""+player2.getScore(), SCORE2_X, SCORE2_Y);
+      g.drawString("Score "+player1.getScore(), SCORE1_X, SCORE1_Y);
+      g.drawString("Score "+player2.getScore(), SCORE2_X, SCORE2_Y);
+      g.drawImage(this.baniere, BANIERE_X, BANIERE_Y);
     }
    
    

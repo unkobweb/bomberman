@@ -21,14 +21,8 @@ public class MapGameState extends BasicGameState {
 	public static int TIME = 0;
 	private Hud hud = new Hud();
 	public static boolean gameFinished = false;
+
 	
-	/*public static void main(String[] args) throws SlickException {
-		new AppGameContainer(new MapGameState(), 640, 480, false).start();
-	}
-	
-	public MapGameState() {
-		super("Le bomberman");
-	}*/
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
 		MapGameState.container = container;
@@ -43,7 +37,7 @@ public class MapGameState extends BasicGameState {
 		container.getInput().addKeyListener(controller2);
 		container.getInput().addControllerListener(controller2);
 		MapGameState.container.setShowFPS(false);
-        MapGameState.container.setFullscreen(false);
+        MapGameState.container.setFullscreen(true);
         this.hud.init();
 		
 		/*Music background = new Music("resources/music/music.wav");
