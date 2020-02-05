@@ -164,7 +164,7 @@ public class Player {
 	}
 	
 	public void poserBombe() {
-		if (this.nombreBombe > 0 && !this.dead) {
+		if (this.nombreBombe > 0 && !this.dead && MapGameState.TIME > 200) {
 			this.nombreBombe--;
 			Bomb b = new Bomb(this.x, this.y, this.timerBomb, this.rangeBomb, map, this.numero);
 			b.start();

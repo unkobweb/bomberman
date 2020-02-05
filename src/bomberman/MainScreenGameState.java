@@ -35,7 +35,7 @@ public class MainScreenGameState extends BasicGameState {
         background.draw(0, 0, container.getWidth(), container.getHeight());
         g.drawString(choice == 0 ? "> " + "Play" : "" + "Play", 355, 360);
         g.drawString(choice == 1 ? "> " + "Options" : "" +"Options", 355, 390);
-        g.drawString(choice == 3 ? "> " + "Instructions" : "" +"Instructions", 355, 420);
+        g.drawString(choice == 2 ? "> " + "Instructions" : "" +"Instructions", 355, 420);
     }
  
     @Override
@@ -73,16 +73,32 @@ public class MainScreenGameState extends BasicGameState {
     }
     
     @Override
-	public void controllerDownPressed(int controller) {
+	public void controllerUpPressed(int controller) {
     	if (choice > 0) {
 			choice--;
 		}
 	}
     
     @Override
-	public void controllerUpPressed(int controller) {
-		if (choice < 1) {
+	public void controllerDownPressed(int controller) {
+		if (choice < 2) {
 			choice++;
 		}
 	}
+    
+    public void controllerButtonPressed(int controller, int button) {
+    	if (button == 1) {
+    		switch (choice) {
+    		case 0:
+    			game.enterState(2, new FadeOutTransition(), new FadeInTransition());
+    			break;
+    		case 1:
+    			game.enterState(3, new FadeOutTransition(), new FadeInTransition());
+    			break;
+    		case 2:
+    			game.enterState(4, new FadeOutTransition(), new FadeInTransition());
+    			break;
+    		} 
+    	}
+    }
 }
