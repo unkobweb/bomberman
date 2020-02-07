@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -25,6 +26,7 @@ public class MapGameState extends BasicGameState {
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
+		this.TIME = 0;
 		this.gameFinished = false;
 		this.goesToScore = false;
 		MapGameState.container = container;
@@ -39,7 +41,7 @@ public class MapGameState extends BasicGameState {
 		container.getInput().addKeyListener(controller2);
 		container.getInput().addControllerListener(controller2);
 		MapGameState.container.setShowFPS(false);
-        MapGameState.container.setFullscreen(true);
+        MapGameState.container.setFullscreen(false);
         this.hud.init();
 		
 		/*Music background = new Music("resources/music/music.wav");

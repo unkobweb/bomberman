@@ -85,9 +85,16 @@ public class Player {
 	
 	public void init() throws SlickException {
 		this.numberOfDeath = 0;
+		this.dead = false;
+		System.out.println(this.baseNbBomb);
+		System.out.println(this.baseRange);
+		System.out.println(this.baseSpeed);
 		this.nombreBombe = this.baseNbBomb;
 		this.rangeBomb = this.baseRange;
 		this.speed = this.baseSpeed;
+		System.out.println("nbbomb : "+this.getNbBomb());
+		System.out.println("nbrange : "+this.getNbRange());
+		System.out.println("nbspeed : "+this.getSpeed());
 		this.x = this.baseX;
 		this.y = this.baseY;
 		this.score = 0;

@@ -115,167 +115,170 @@ public class Map {
 	}
 	
 	public void exploserBomb(float x, float y, int range, int player) {
-		int tileW = this.map.getTileWidth();
-	    int tileH = this.map.getTileHeight();
-	    int tuileX = (int) x / tileW;
-	    int tuileY = (int) y / tileH;
-	    int logicLayer = this.map.getLayerIndex("mur");
-	    this.map.setTileId(tuileX, tuileY, logicLayer, 5);
-	    int nombreBlocsDetruit = 0;
-	    for (int i = 1;i <= range;i++) {
-	    	Image tile = this.map.getTileImage(((int) x / tileW)+i, (int) y / tileH, logicLayer);
-	    	if (tile == null) {
-	    		this.map.setTileId(tuileX+i, tuileY, logicLayer, 5);
-	    	} else {
-	    		if (tile.getResourceReference().equalsIgnoreCase("resources/map/../tuiles/Caisse.png")) {
-	    			this.map.setTileId(tuileX+i, tuileY, logicLayer, 5);
-	    			nombreBlocsDetruit++;
-	    		}
-	    		break;
-	    	}
-	    }
-	    for (int i = 1;i <= range;i++) {
-	    	Image tile = this.map.getTileImage(((int) x / tileW)-i, (int) y / tileH, logicLayer);
-	    	if (tile == null) {
-	    		this.map.setTileId(tuileX-i, tuileY, logicLayer, 5);
-	    	} else {
-	    		if (tile.getResourceReference().equalsIgnoreCase("resources/map/../tuiles/Caisse.png")) {
-	    			this.map.setTileId(tuileX-i, tuileY, logicLayer, 5);
-	    			nombreBlocsDetruit++;
-	    		}
-	    		break;
-	    	}
-	    }
-	    for (int i = 1;i <= range;i++) {
-	    	Image tile = this.map.getTileImage((int) x / tileW, ((int) y / tileH)+i, logicLayer);
-	    	if (tile == null) {
-	    		this.map.setTileId(tuileX, tuileY+i, logicLayer, 5);
-	    	} else {
-	    		if (tile.getResourceReference().equalsIgnoreCase("resources/map/../tuiles/Caisse.png")) {
-	    			this.map.setTileId(tuileX, tuileY+i, logicLayer, 5);
-	    			nombreBlocsDetruit++;
-	    		}
-	    		break;
-	    	}
-	    }
-	    for (int i = 1;i <= range;i++) {
-	    	Image tile = this.map.getTileImage((int) x / tileW, ((int) y / tileH)-i, logicLayer);
-	    	if (tile == null) {
-	    		this.map.setTileId(tuileX, tuileY-i, logicLayer, 5);
-	    	} else {
-	    		if (tile.getResourceReference().equalsIgnoreCase("resources/map/../tuiles/Caisse.png")) {
-	    			this.map.setTileId(tuileX, tuileY-i, logicLayer, 5);
-	    			nombreBlocsDetruit++;
-	    		}
-	    		break;
-	    	}
-	    }
-	    MapGameState.addScore((nombreBlocsDetruit * 15), player);
-	    
+		if (MapGameState.TIME > 500) {
+			int tileW = this.map.getTileWidth();
+		    int tileH = this.map.getTileHeight();
+		    int tuileX = (int) x / tileW;
+		    int tuileY = (int) y / tileH;
+		    int logicLayer = this.map.getLayerIndex("mur");
+		    this.map.setTileId(tuileX, tuileY, logicLayer, 5);
+		    int nombreBlocsDetruit = 0;
+		    for (int i = 1;i <= range;i++) {
+		    	Image tile = this.map.getTileImage(((int) x / tileW)+i, (int) y / tileH, logicLayer);
+		    	if (tile == null) {
+		    		this.map.setTileId(tuileX+i, tuileY, logicLayer, 5);
+		    	} else {
+		    		if (tile.getResourceReference().equalsIgnoreCase("resources/map/../tuiles/Caisse.png")) {
+		    			this.map.setTileId(tuileX+i, tuileY, logicLayer, 5);
+		    			nombreBlocsDetruit++;
+		    		}
+		    		break;
+		    	}
+		    }
+		    for (int i = 1;i <= range;i++) {
+		    	Image tile = this.map.getTileImage(((int) x / tileW)-i, (int) y / tileH, logicLayer);
+		    	if (tile == null) {
+		    		this.map.setTileId(tuileX-i, tuileY, logicLayer, 5);
+		    	} else {
+		    		if (tile.getResourceReference().equalsIgnoreCase("resources/map/../tuiles/Caisse.png")) {
+		    			this.map.setTileId(tuileX-i, tuileY, logicLayer, 5);
+		    			nombreBlocsDetruit++;
+		    		}
+		    		break;
+		    	}
+		    }
+		    for (int i = 1;i <= range;i++) {
+		    	Image tile = this.map.getTileImage((int) x / tileW, ((int) y / tileH)+i, logicLayer);
+		    	if (tile == null) {
+		    		this.map.setTileId(tuileX, tuileY+i, logicLayer, 5);
+		    	} else {
+		    		if (tile.getResourceReference().equalsIgnoreCase("resources/map/../tuiles/Caisse.png")) {
+		    			this.map.setTileId(tuileX, tuileY+i, logicLayer, 5);
+		    			nombreBlocsDetruit++;
+		    		}
+		    		break;
+		    	}
+		    }
+		    for (int i = 1;i <= range;i++) {
+		    	Image tile = this.map.getTileImage((int) x / tileW, ((int) y / tileH)-i, logicLayer);
+		    	if (tile == null) {
+		    		this.map.setTileId(tuileX, tuileY-i, logicLayer, 5);
+		    	} else {
+		    		if (tile.getResourceReference().equalsIgnoreCase("resources/map/../tuiles/Caisse.png")) {
+		    			this.map.setTileId(tuileX, tuileY-i, logicLayer, 5);
+		    			nombreBlocsDetruit++;
+		    		}
+		    		break;
+		    	}
+		    }
+		    MapGameState.addScore((nombreBlocsDetruit * 15), player);
+		}
 	}
 	
 	public void clearExplosion(float x, float y, int range) {
-		int tileW = this.map.getTileWidth();
-	    int tileH = this.map.getTileHeight();
-	    int tuileX = (int) x / tileW;
-	    int tuileY = (int) y / tileH;
-	    int logicLayer = this.map.getLayerIndex("mur");
-	    this.map.setTileId(tuileX, tuileY, logicLayer, 0);
-	    for (int i = 1;i <= range;i++) {
-	    	Image tile = this.map.getTileImage(((int) x / tileW)+i, (int) y / tileH, logicLayer);
-	    	if (tile == null) {
-	    		break;
-	    	} else {
-	    		if (tile.getResourceReference().equalsIgnoreCase("resources/map/../tuiles/explode.png")) {
-	    			int itemChance = (int) (Math.random() * ( 100 - 0 ));
-	    			if (itemChance < 13) {
-	    				int whichItem = (int) (Math.random() * ( 100 - 0 ));
-	    				if (whichItem < 33) {
-	    					this.map.setTileId(tuileX+i, tuileY, logicLayer, 7);
-	    				} else if (whichItem < 66) {
-	    					this.map.setTileId(tuileX+i, tuileY, logicLayer, 8);
-	    				} else {
-	    					this.map.setTileId(tuileX+i, tuileY, logicLayer, 9);
-	    				}
-	    			} else {
-	    				this.map.setTileId(tuileX+i, tuileY, logicLayer, 0);
-	    			}
-	    		} else {
-	    			break;
-	    		}
-	    	}
-	    }
-	    for (int i = 1;i <= range;i++) {
-	    	Image tile = this.map.getTileImage(((int) x / tileW)-i, (int) y / tileH, logicLayer);
-	    	if (tile == null) {
-	    		break;
-	    	} else {
-	    		if (tile.getResourceReference().equalsIgnoreCase("resources/map/../tuiles/explode.png")) {
-	    			int itemChance = (int) (Math.random() * ( 100 - 0 ));
-	    			if (itemChance < 13) {
-	    				int whichItem = (int) (Math.random() * ( 100 - 0 ));
-	    				if (whichItem < 33) {
-	    					this.map.setTileId(tuileX-i, tuileY, logicLayer, 7);
-	    				} else if (whichItem < 66) {
-	    					this.map.setTileId(tuileX-i, tuileY, logicLayer, 8);
-	    				} else {
-	    					this.map.setTileId(tuileX-i, tuileY, logicLayer, 9);
-	    				}
-	    			} else {
-	    				this.map.setTileId(tuileX-i, tuileY, logicLayer, 0);
-	    			}
-	    		} else {
-	    			break;
-	    		}
-	    	}
-	    }
-	    for (int i = 1;i <= range;i++) {
-	    	Image tile = this.map.getTileImage((int) x / tileW, ((int) y / tileH)+i, logicLayer);
-	    	if (tile == null) {
-	    		break;
-	    	} else {
-	    		if (tile.getResourceReference().equalsIgnoreCase("resources/map/../tuiles/explode.png")) {
-	    			int itemChance = (int) (Math.random() * ( 100 - 0 ));
-	    			if (itemChance < 13) {
-	    				int whichItem = (int) (Math.random() * ( 100 - 0 ));
-	    				if (whichItem < 33) {
-	    					this.map.setTileId(tuileX, tuileY+i, logicLayer, 7);
-	    				} else if (whichItem < 66) {
-	    					this.map.setTileId(tuileX, tuileY+i, logicLayer, 8);
-	    				} else {
-	    					this.map.setTileId(tuileX, tuileY+i, logicLayer, 9);
-	    				}
-	    			} else {
-	    				this.map.setTileId(tuileX, tuileY+i, logicLayer, 0);
-	    			}
-	    		} else {
-	    			break;
-	    		}
-	    	}
-	    }
-	    for (int i = 1;i <= range;i++) {
-	    	Image tile = this.map.getTileImage((int) x / tileW, ((int) y / tileH)-i, logicLayer);
-	    	if (tile == null) {
-	    		break;
-	    	} else {
-	    		if (tile.getResourceReference().equalsIgnoreCase("resources/map/../tuiles/explode.png")) {
-	    			int itemChance = (int) (Math.random() * ( 100 - 0 ));
-	    			if (itemChance < 13) {
-	    				int whichItem = (int) (Math.random() * ( 100 - 0 ));
-	    				if (whichItem < 33) {
-	    					this.map.setTileId(tuileX, tuileY-i, logicLayer, 7);
-	    				} else if (whichItem < 66) {
-	    					this.map.setTileId(tuileX, tuileY-i, logicLayer, 8);
-	    				} else {
-	    					this.map.setTileId(tuileX, tuileY-i, logicLayer, 9);
-	    				}
-	    			} else {
-	    				this.map.setTileId(tuileX, tuileY-i, logicLayer, 0);
-	    			}
-	    		} else {
-	    			break;
-	    		}
-	    	}
-	    }
+		if (MapGameState.TIME > 500) {
+			int tileW = this.map.getTileWidth();
+		    int tileH = this.map.getTileHeight();
+		    int tuileX = (int) x / tileW;
+		    int tuileY = (int) y / tileH;
+		    int logicLayer = this.map.getLayerIndex("mur");
+		    this.map.setTileId(tuileX, tuileY, logicLayer, 0);
+		    for (int i = 1;i <= range;i++) {
+		    	Image tile = this.map.getTileImage(((int) x / tileW)+i, (int) y / tileH, logicLayer);
+		    	if (tile == null) {
+		    		break;
+		    	} else {
+		    		if (tile.getResourceReference().equalsIgnoreCase("resources/map/../tuiles/explode.png")) {
+		    			int itemChance = (int) (Math.random() * ( 100 - 0 ));
+		    			if (itemChance < 13) {
+		    				int whichItem = (int) (Math.random() * ( 100 - 0 ));
+		    				if (whichItem < 33) {
+		    					this.map.setTileId(tuileX+i, tuileY, logicLayer, 7);
+		    				} else if (whichItem < 66) {
+		    					this.map.setTileId(tuileX+i, tuileY, logicLayer, 8);
+		    				} else {
+		    					this.map.setTileId(tuileX+i, tuileY, logicLayer, 9);
+		    				}
+		    			} else {
+		    				this.map.setTileId(tuileX+i, tuileY, logicLayer, 0);
+		    			}
+		    		} else {
+		    			break;
+		    		}
+		    	}
+		    }
+		    for (int i = 1;i <= range;i++) {
+		    	Image tile = this.map.getTileImage(((int) x / tileW)-i, (int) y / tileH, logicLayer);
+		    	if (tile == null) {
+		    		break;
+		    	} else {
+		    		if (tile.getResourceReference().equalsIgnoreCase("resources/map/../tuiles/explode.png")) {
+		    			int itemChance = (int) (Math.random() * ( 100 - 0 ));
+		    			if (itemChance < 13) {
+		    				int whichItem = (int) (Math.random() * ( 100 - 0 ));
+		    				if (whichItem < 33) {
+		    					this.map.setTileId(tuileX-i, tuileY, logicLayer, 7);
+		    				} else if (whichItem < 66) {
+		    					this.map.setTileId(tuileX-i, tuileY, logicLayer, 8);
+		    				} else {
+		    					this.map.setTileId(tuileX-i, tuileY, logicLayer, 9);
+		    				}
+		    			} else {
+		    				this.map.setTileId(tuileX-i, tuileY, logicLayer, 0);
+		    			}
+		    		} else {
+		    			break;
+		    		}
+		    	}
+		    }
+		    for (int i = 1;i <= range;i++) {
+		    	Image tile = this.map.getTileImage((int) x / tileW, ((int) y / tileH)+i, logicLayer);
+		    	if (tile == null) {
+		    		break;
+		    	} else {
+		    		if (tile.getResourceReference().equalsIgnoreCase("resources/map/../tuiles/explode.png")) {
+		    			int itemChance = (int) (Math.random() * ( 100 - 0 ));
+		    			if (itemChance < 13) {
+		    				int whichItem = (int) (Math.random() * ( 100 - 0 ));
+		    				if (whichItem < 33) {
+		    					this.map.setTileId(tuileX, tuileY+i, logicLayer, 7);
+		    				} else if (whichItem < 66) {
+		    					this.map.setTileId(tuileX, tuileY+i, logicLayer, 8);
+		    				} else {
+		    					this.map.setTileId(tuileX, tuileY+i, logicLayer, 9);
+		    				}
+		    			} else {
+		    				this.map.setTileId(tuileX, tuileY+i, logicLayer, 0);
+		    			}
+		    		} else {
+		    			break;
+		    		}
+		    	}
+		    }
+		    for (int i = 1;i <= range;i++) {
+		    	Image tile = this.map.getTileImage((int) x / tileW, ((int) y / tileH)-i, logicLayer);
+		    	if (tile == null) {
+		    		break;
+		    	} else {
+		    		if (tile.getResourceReference().equalsIgnoreCase("resources/map/../tuiles/explode.png")) {
+		    			int itemChance = (int) (Math.random() * ( 100 - 0 ));
+		    			if (itemChance < 13) {
+		    				int whichItem = (int) (Math.random() * ( 100 - 0 ));
+		    				if (whichItem < 33) {
+		    					this.map.setTileId(tuileX, tuileY-i, logicLayer, 7);
+		    				} else if (whichItem < 66) {
+		    					this.map.setTileId(tuileX, tuileY-i, logicLayer, 8);
+		    				} else {
+		    					this.map.setTileId(tuileX, tuileY-i, logicLayer, 9);
+		    				}
+		    			} else {
+		    				this.map.setTileId(tuileX, tuileY-i, logicLayer, 0);
+		    			}
+		    		} else {
+		    			break;
+		    		}
+		    	}
+		    }
+		}
 	}
 }
