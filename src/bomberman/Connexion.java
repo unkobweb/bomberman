@@ -15,13 +15,14 @@ public class Connexion {
         return instance;
     }
 	
-	public void init() {
+	public void init() throws ClassNotFoundException {
 		try {
             String url = "jdbc:mysql://mysql-mpreard.alwaysdata.net/mpreard_bomberman";
             Properties info = new Properties();
             info.put("user", "mpreard");
             info.put("password", "7b3097628");
 
+            Class.forName("com.mysql.jdbc.Driver"); 
             this.dbConnection = DriverManager.getConnection(url, info);
 
             if (dbConnection != null) {

@@ -35,7 +35,12 @@ public class MainScreenGameState extends BasicGameState {
         // TODO Auto-generated method stub
         this.game = game;
         this.background = new Image("resources/homeScreen/HomeScreen.png");
-        connect.init();
+        try {
+			connect.init();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
         this.tenBest = connect.getTenBest();
         try {
         	while(tenBest.next()) {
