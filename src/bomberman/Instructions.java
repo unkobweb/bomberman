@@ -10,6 +10,10 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
+import org.newdawn.slick.ControllerListener;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.KeyListener;
+
 public class Instructions extends BasicGameState {
 
     public static final int ID = 4;
@@ -74,6 +78,12 @@ public class Instructions extends BasicGameState {
     @Override
     public void keyReleased(int key, char c) {
       game.enterState(OptionScreen.ID);
+    }
+    
+    public void controllerButtonPressed(int controller, int button) {
+    	if (button == 2) {
+    		game.enterState(1, new FadeOutTransition(), new FadeInTransition());
+    	}
     }
 
 
