@@ -28,6 +28,7 @@ public class MainScreenGameState extends BasicGameState {
       private Connexion connect = Connexion.getInstance();
       private ArrayList<String> nom = new ArrayList<String>();
       private ArrayList<Integer> score = new ArrayList<Integer>();
+      private static boolean newScore = false;
      
      
     @Override
@@ -42,6 +43,8 @@ public class MainScreenGameState extends BasicGameState {
 			e1.printStackTrace();
 		}
         this.tenBest = connect.getTenBest();
+        this.nom.clear();
+        this.score.clear();
         try {
         	while(tenBest.next()) {
             	this.nom.add(tenBest.getString("name"));
@@ -54,6 +57,10 @@ public class MainScreenGameState extends BasicGameState {
         } catch (SQLException e) {
         	e.printStackTrace();
         }
+    }
+    
+    public static void updateLeaderboard() {
+    	newScore = true;
     }
  
     @Override
@@ -91,6 +98,11 @@ public class MainScreenGameState extends BasicGameState {
  
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+    	
+    	if (newScore) {
+    		this.init(container, game);
+    		newScore = false;
+    	}
         // TODO Auto-generated method stub
         if(container.getInput().isKeyPressed(Input.KEY_F1)) {
             game.enterState(2, new FadeOutTransition(), new FadeInTransition());

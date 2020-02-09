@@ -116,6 +116,9 @@ public class Map {
 	
 	public void exploserBomb(float x, float y, int range, int player) {
 		if (MapGameState.TIME > 500) {
+			String itemBomb = "resources/map/../tuiles/itemBomb.png";
+	    	String itemRange = "resources/map/../tuiles/itemRange.png";
+	    	String itemSpeed = "resources/map/../tuiles/itemSpeed.png";
 			int tileW = this.map.getTileWidth();
 		    int tileH = this.map.getTileHeight();
 		    int tuileX = (int) x / tileW;
@@ -127,7 +130,9 @@ public class Map {
 		    	Image tile = this.map.getTileImage(((int) x / tileW)+i, (int) y / tileH, logicLayer);
 		    	if (tile == null) {
 		    		this.map.setTileId(tuileX+i, tuileY, logicLayer, 5);
-		    	} else {
+		    	} else if (tile.getResourceReference().equals(itemBomb) || tile.getResourceReference().equals(itemSpeed) || tile.getResourceReference().equals(itemRange)) {
+	    			this.map.setTileId(tuileX+i, tuileY, logicLayer, 5);
+	    		} else {
 		    		if (tile.getResourceReference().equalsIgnoreCase("resources/map/../tuiles/Caisse.png")) {
 		    			this.map.setTileId(tuileX+i, tuileY, logicLayer, 5);
 		    			nombreBlocsDetruit++;
@@ -139,7 +144,9 @@ public class Map {
 		    	Image tile = this.map.getTileImage(((int) x / tileW)-i, (int) y / tileH, logicLayer);
 		    	if (tile == null) {
 		    		this.map.setTileId(tuileX-i, tuileY, logicLayer, 5);
-		    	} else {
+		    	} else if (tile.getResourceReference().equals(itemBomb) || tile.getResourceReference().equals(itemSpeed) || tile.getResourceReference().equals(itemRange)) {
+	    			this.map.setTileId(tuileX-i, tuileY, logicLayer, 5);
+	    		} else {
 		    		if (tile.getResourceReference().equalsIgnoreCase("resources/map/../tuiles/Caisse.png")) {
 		    			this.map.setTileId(tuileX-i, tuileY, logicLayer, 5);
 		    			nombreBlocsDetruit++;
@@ -151,7 +158,9 @@ public class Map {
 		    	Image tile = this.map.getTileImage((int) x / tileW, ((int) y / tileH)+i, logicLayer);
 		    	if (tile == null) {
 		    		this.map.setTileId(tuileX, tuileY+i, logicLayer, 5);
-		    	} else {
+		    	} else if (tile.getResourceReference().equals(itemBomb) || tile.getResourceReference().equals(itemSpeed) || tile.getResourceReference().equals(itemRange)) {
+	    			this.map.setTileId(tuileX, tuileY+i, logicLayer, 5);
+	    		} else {
 		    		if (tile.getResourceReference().equalsIgnoreCase("resources/map/../tuiles/Caisse.png")) {
 		    			this.map.setTileId(tuileX, tuileY+i, logicLayer, 5);
 		    			nombreBlocsDetruit++;
@@ -163,7 +172,9 @@ public class Map {
 		    	Image tile = this.map.getTileImage((int) x / tileW, ((int) y / tileH)-i, logicLayer);
 		    	if (tile == null) {
 		    		this.map.setTileId(tuileX, tuileY-i, logicLayer, 5);
-		    	} else {
+		    	} else if (tile.getResourceReference().equals(itemBomb) || tile.getResourceReference().equals(itemSpeed) || tile.getResourceReference().equals(itemRange)) {
+	    			this.map.setTileId(tuileX, tuileY-i, logicLayer, 5);
+	    		} else {
 		    		if (tile.getResourceReference().equalsIgnoreCase("resources/map/../tuiles/Caisse.png")) {
 		    			this.map.setTileId(tuileX, tuileY-i, logicLayer, 5);
 		    			nombreBlocsDetruit++;

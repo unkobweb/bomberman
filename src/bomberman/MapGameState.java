@@ -51,6 +51,14 @@ public class MapGameState extends BasicGameState {
 	public static void finishGame() {
 		MapGameState.gameFinished = true;
 	}
+	
+	public static int returnP1Score() {
+		return player.getScore();
+	}
+	
+	public static int returnP2Score() {
+		return player2.getScore();
+	}
 
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
@@ -80,6 +88,13 @@ public class MapGameState extends BasicGameState {
             
 		}
 		if (MapGameState.gameFinished || TIME >= 300000) {
+			int diffLife = player.getNbDeath() - player2.getNbDeath();
+			if (diffLife < 0) {
+				player.addScore((diffLife*(-1)*200));
+			} else {
+				player2.addScore(diffLife*200);
+			}
+			EndScreenGame.finishGame(player.getScore(), player2.getScore());
             game.enterState(5, new FadeOutTransition(), new FadeInTransition());
             this.goesToScore = true;
 		}

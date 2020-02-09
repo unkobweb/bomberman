@@ -46,6 +46,22 @@ public class Connexion {
 		System.out.println(rs);
 		return rs;
 	}
+	
+	public void putScore(String name, int score) {
+		try {
+            String query = "INSERT INTO score (name, score) VALUES (?, ?)";
+            PreparedStatement preparedStmt = dbConnection.prepareStatement(query);
+            preparedStmt.setString(1, name);
+            preparedStmt.setInt   (2, score);
+
+            // execute the java preparedstatement
+            preparedStmt.executeUpdate();
+            
+        } catch (SQLException exp){
+              System.err.println("Got an exception! ");
+              System.err.println(exp.getMessage());
+        }
+	}
 
     /*public static void main(String[] args) {
         // TODO Auto-generated method stub
