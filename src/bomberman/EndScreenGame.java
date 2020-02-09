@@ -18,7 +18,7 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 public class EndScreenGame extends BasicGameState {
 
     public static final int ID = 5;
-    private Image background;
+    private Image sadBomberman;
     private Animation crown;
     private StateBasedGame game;
     private static String winner = null;
@@ -34,6 +34,7 @@ public class EndScreenGame extends BasicGameState {
     private Connexion connect = Connexion.getInstance();
 
   public static void finishGame(int P1Score, int P2Score) {
+	  equality = false;
 	  if (P1Score == P2Score) {
     	  equality = true;
     	  winnerScore = P1Score;
@@ -54,6 +55,7 @@ public class EndScreenGame extends BasicGameState {
   public void init(GameContainer container, StateBasedGame game) throws SlickException {
       // TODO Auto-generated method stub
       this.game = game;
+      this.sadBomberman = new Image("resources/img/sad_bomberman2.png");
       SpriteSheet flying_crown = new SpriteSheet("resources/img/crown_spritesheet.png",450,168);
       this.crown = new Animation(flying_crown, 120);
   }
@@ -62,7 +64,13 @@ public class EndScreenGame extends BasicGameState {
   public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
       // TODO Auto-generated method stub
       if (equality) {
-    	  g.drawString("ÉGALITÉ", 50, 50);
+    	  g.drawString("You're not even capable of winning..", 200, 50);
+    	  g.drawString("Both of you, you disappoint me...", 200, 75);
+    	  g.drawString("Only winners can go into the leaderboard.", 200, 125);
+    	  g.drawString("Please go away..", 200, 175);
+    	  g.drawString("Shame on you.", 200, 200);
+    	  g.drawString("Press left button to go to main menu..", 200, 250);
+    	  g.drawImage(this.sadBomberman, 300, 300);
       } else {
     	  g.drawAnimation(this.crown, 175, 5);
     	  g.drawString("WINNER", 370, 180);
@@ -89,13 +97,13 @@ public class EndScreenGame extends BasicGameState {
     
     @Override
     public void keyPressed(int key, char c) {
-      System.out.println(key);
-      System.out.println(Input.KEY_UP);
       switch (key) {
       	case Input.KEY_ENTER:
-      	  connect.putScore(this.alphabet.get(this.firstLetter)+this.alphabet.get(this.secondLetter)+this.alphabet.get(this.thirdLetter), this.winnerScore);
-    	  game.enterState(OptionScreen.ID);
-    	  MainScreenGameState.updateLeaderboard();
+      		if (!equality) {
+      			connect.putScore(this.alphabet.get(this.firstLetter)+this.alphabet.get(this.secondLetter)+this.alphabet.get(this.thirdLetter), this.winnerScore);
+      	      	MainScreenGameState.updateLeaderboard();
+      		}
+    	  game.enterState(MainScreenGameState.ID, new FadeOutTransition(), new FadeInTransition());
     	  break;
       	case Input.KEY_LEFT:
       		if (this.letterChoiced > 0) {
