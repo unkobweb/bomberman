@@ -35,6 +35,31 @@ public class Connexion {
           }
 	}
 	
+	public ResultSet getSettings() {
+		ResultSet rs = null;
+		try {
+			Statement stmn = this.dbConnection.createStatement();
+            rs = stmn.executeQuery("SELECT * FROM settings");
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	
+	public void setSettings(int life, int fire, int speed, int bomb) {
+		try {
+			String query = "UPDATE settings SET life = ?, fire = ?, bomb = ?, speed = ?";
+            PreparedStatement preparedStmt = dbConnection.prepareStatement(query);
+            preparedStmt.setInt   (1, life);
+            preparedStmt.setInt   (2, fire);
+            preparedStmt.setInt   (3, bomb);
+            preparedStmt.setInt   (4, speed);
+            preparedStmt.executeUpdate();
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+	}
+	
 	public ResultSet getTenBest() {
 		ResultSet rs = null;
 		try {
@@ -43,7 +68,6 @@ public class Connexion {
 		} catch (SQLException e){
 			e.printStackTrace();
 		}
-		System.out.println(rs);
 		return rs;
 	}
 	
