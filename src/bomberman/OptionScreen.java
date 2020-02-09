@@ -56,7 +56,8 @@ public class OptionScreen extends BasicGameState {
         g.drawString(choice == 2 ? "    < " + this.statBonus.get(2) + " >" :     "    " + this.statBonus.get(2),400, 340);
         g.drawImage(this.bomb, 350, 440);
         g.drawString(choice == 3 ? "    < " + this.statBonus.get(3) + " >" :     "    " + this.statBonus.get(3),400, 440);
-        g.drawString(choice == 4 ? "< " + "Reset default settings" + " >" : "Reset default settings", 540, 550);
+        g.drawString(choice == 4 ? "< " + "Apply Changes" + " >" : "Apply changes", 540, 450);
+        g.drawString(choice == 5 ? "< " + "Reset default settings" + " >" : "Reset default settings", 540, 550);
         g.drawImage(this.back, 10, 500);
         g.drawString("Press right button \n to return menu", 60, 535);
     }
@@ -80,7 +81,7 @@ public class OptionScreen extends BasicGameState {
     public void keyPressed(int key, char c) {
       switch(key) {
       case Input.KEY_DOWN:
-    	  if(choice < 4) {
+    	  if(choice < 5) {
     		  choice++;
     	  }
     	  break;
@@ -112,9 +113,11 @@ public class OptionScreen extends BasicGameState {
     	  } 
     	  break;
       case Input.KEY_ENTER:
-    	  if(choice == 4) {
+    	  if(choice == 5) {
     		  statBonus = new ArrayList<Integer>(Arrays.asList(3,2,0,1));
     		  System.out.println(defaultStatBonus);
+    	  } else if(choice == 4) {
+    		  System.out.println("wesh");
     	  }
       break;
       }
