@@ -94,9 +94,9 @@ public class Hud {
       g.drawImage(this.fireTwo, F2_X, F2_Y);
       g.drawString(""+player2.getNbRange(), F2_X + 50, F2_Y + 5);
       g.drawImage(this.healOne, H1_X, H1_Y);
-      g.drawString(""+(3-player1.getNbDeath()), H1_X + 50, H1_Y + 5);
+      g.drawString(""+player1.getLife(), H1_X + 50, H1_Y + 5);
       g.drawImage(this.healTwo, H2_X, H2_Y);
-      g.drawString(""+(3-player2.getNbDeath()), H2_X + 50, H2_Y + 5);
+      g.drawString(""+player2.getLife(), H2_X + 50, H2_Y + 5);
       g.drawImage(this.speedOne, S1_X, S1_Y);
       g.drawString(""+player1.getSpeed(), S1_X + 50, S1_Y + 5);
       g.drawImage(this.speedTwo, S2_X, S2_Y);

@@ -2,6 +2,9 @@ package bomberman;
 
 
 import org.newdawn.slick.GameContainer;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -28,6 +31,8 @@ public class OptionScreen extends BasicGameState {
       private Image bomb;
       private Image back;
       private int choice = 0;
+      private Connexion connect = Connexion.getInstance();
+      private boolean quited = true; 
       
 
 
@@ -65,21 +70,31 @@ public class OptionScreen extends BasicGameState {
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
         // TODO Auto-generated method stub
-        if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
-            game.enterState(1, new FadeOutTransition(), new FadeInTransition());
+        if (quited) {
+        	quited = false;
+        	ResultSet rs = connect.getSettings();
+        	try {
+				while(rs.next()) {
+					statBonus.set(0, rs.getInt("life"));
+					statBonus.set(1, rs.getInt("fire"));
+					statBonus.set(2, rs.getInt("speed"));
+					statBonus.set(3, rs.getInt("bomb"));
+				    //System.out.println("Id : "+rs.getInt("id")+ "\n" +"Score : "+rs.getInt("score")+ "\n" + "Nom : "+rs.getString("name") + "\n");
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
-        
-
     }
 
-    @Override
-    public void keyReleased(int key, char c) {
-      game.enterState(OptionScreen.ID);
-    }
-    
     @Override
     public void keyPressed(int key, char c) {
       switch(key) {
+      case Input.KEY_ESCAPE:
+    	  game.enterState(1, new FadeOutTransition(), new FadeInTransition());
+    	  //this.quited = true;
+    	  break;
       case Input.KEY_DOWN:
     	  if(choice < 5) {
     		  choice++;
@@ -117,7 +132,7 @@ public class OptionScreen extends BasicGameState {
     		  statBonus = new ArrayList<Integer>(Arrays.asList(3,2,0,1));
     		  System.out.println(defaultStatBonus);
     	  } else if(choice == 4) {
-    		  System.out.println("wesh");
+    		  connect.setSettings(statBonus.get(0), statBonus.get(1), statBonus.get(2), statBonus.get(3));
     	  }
       break;
       }

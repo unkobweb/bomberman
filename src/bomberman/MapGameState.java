@@ -14,6 +14,7 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 public class MapGameState extends BasicGameState {
 
 	public static final int ID = 2;
+	private StateBasedGame game;
 	private static GameContainer container;
 	private static Map map = new Map();
 	private static Player player = new Player(map, 48, 48, 1);
@@ -26,6 +27,7 @@ public class MapGameState extends BasicGameState {
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
+		this.game = game;
 		this.TIME = 0;
 		this.gameFinished = false;
 		this.goesToScore = false;
@@ -82,10 +84,6 @@ public class MapGameState extends BasicGameState {
 			if (listBomb.get(i).cleared == true) {
 				listBomb.remove(i);
 			}
-		}
-		if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
-            game.enterState(1, new FadeOutTransition(), new FadeInTransition());
-            
 		}
 		if (MapGameState.gameFinished || TIME >= 300000) {
 			int diffLife = player.getNbDeath() - player2.getNbDeath();
@@ -152,6 +150,14 @@ public class MapGameState extends BasicGameState {
     public int getID() {
         // TODO Auto-generated method stub
         return ID;
+    }
+	
+	@Override
+    public void keyPressed(int key, char c) {
+        switch (key) {
+        case Input.KEY_ESCAPE:
+        	game.enterState(1, new FadeOutTransition(), new FadeInTransition());
+        }
     }
 
 }

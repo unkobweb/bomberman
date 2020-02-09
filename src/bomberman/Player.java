@@ -1,5 +1,8 @@
 package bomberman;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -19,6 +22,8 @@ public class Player {
 	private boolean dead = false;
 	private int deadTime = 0;
 	private int numberOfDeath = 0;
+	private int nbOfLife = 3;
+    private Connexion connect = Connexion.getInstance();
 	
 	private int timerBomb = 3;
 	private int rangeBomb = 2;
@@ -34,9 +39,6 @@ public class Player {
 		this.y = y;
 		this.baseX = x;
 		this.baseY = y;
-		this.baseNbBomb = 1;
-		this.baseRange = 2;
-		this.baseSpeed = 0;
 		this.numero = numero;
 	}
 	
@@ -46,6 +48,10 @@ public class Player {
 	
 	public int getScore() {
 		return this.score;
+	}
+	
+	public int getLife() {
+		return this.nbOfLife - this.numberOfDeath;
 	}
 	
 	public int getNbDeath() {
@@ -84,17 +90,25 @@ public class Player {
 	}
 	
 	public void init() throws SlickException {
+		ResultSet rs = connect.getSettings();
+    	try {
+			while(rs.next()) {
+				this.nbOfLife = rs.getInt("life");
+				this.baseRange = rs.getInt("fire");
+				this.baseSpeed = rs.getInt("speed");
+				this.baseNbBomb = rs.getInt("bomb");
+			    //System.out.println("Id : "+rs.getInt("id")+ "\n" +"Score : "+rs.getInt("score")+ "\n" + "Nom : "+rs.getString("name") + "\n");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.numberOfDeath = 0;
 		this.dead = false;
-		System.out.println(this.baseNbBomb);
-		System.out.println(this.baseRange);
-		System.out.println(this.baseSpeed);
 		this.nombreBombe = this.baseNbBomb;
+		this.nombreBombeMax = this.baseNbBomb;
 		this.rangeBomb = this.baseRange;
 		this.speed = this.baseSpeed;
-		System.out.println("nbbomb : "+this.getNbBomb());
-		System.out.println("nbrange : "+this.getNbRange());
-		System.out.println("nbspeed : "+this.getSpeed());
 		this.x = this.baseX;
 		this.y = this.baseY;
 		this.score = 0;
@@ -148,7 +162,7 @@ public class Player {
 			this.score = (this.score >= 200) ? this.score - 200 : 0;
 			this.deadTime = MapGameState.TIME;
 			this.numberOfDeath++;
-			if (this.numberOfDeath == 3) {
+			if (this.numberOfDeath == this.nbOfLife) {
 				MapGameState.finishGame();
 			}
 			this.x = 1;

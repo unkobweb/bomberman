@@ -135,7 +135,10 @@ public class MainScreenGameState extends BasicGameState {
     	  		}
     	  		break;
     	  	case Input.KEY_ENTER:
+    	  		System.out.println("fromage");
+	  			System.out.println(this.choice);
     	  		switch (this.choice) {
+    	  			
     	  		case 0:
     	  			game.enterState(2, new FadeOutTransition(), new FadeInTransition());
     	  			break;
