@@ -27,13 +27,16 @@ public class EndScreenGame extends BasicGameState {
     private static int looserScore = 0;
     private static boolean equality = false;
     private ArrayList<String> alphabet = new ArrayList<String>(Arrays.asList("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"));
-    private int firstLetter = 0;
-    private int secondLetter = 0;
-    private int thirdLetter = 0;
+    private static int firstLetter = 0;
+    private static int secondLetter = 0;
+    private static int thirdLetter = 0;
     private int letterChoiced = 0;
     private Connexion connect = Connexion.getInstance();
 
   public static void finishGame(int P1Score, int P2Score) {
+	  firstLetter = 0;
+	  secondLetter = 0;
+	  thirdLetter = 0;
 	  equality = false;
 	  if (P1Score == P2Score) {
     	  equality = true;
