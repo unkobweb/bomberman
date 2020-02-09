@@ -2,6 +2,9 @@ package bomberman;
 
 
 import org.newdawn.slick.GameContainer;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
@@ -15,23 +18,47 @@ public class OptionScreen extends BasicGameState {
 
 
       public static final int ID = 3;
-      private Image background;
       private StateBasedGame game;
-      //private int choice = 0;
+      private ArrayList<Integer> statBonus = new ArrayList<Integer>(Arrays.asList(3,2,0,1));
+      private ArrayList<Integer> defaultStatBonus;
+      private Image background;
+      private Image health;
+      private Image fire;
+      private Image speed;
+      private Image bomb;
+      private Image back;
+      private int choice = 0;
+      
 
 
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
         // TODO Auto-generated method stub
         this.game = game;
-        this.background = new Image("resources/homeScreen/Super-Bomberman-R-21-front-2.jpg");
+        this.background = new Image("resources/optionScreen/baackground.jpg");
+        this.health = new Image("resources/optionScreen/health.png");
+        this.fire = new Image("resources/optionScreen/fireBoost.png");
+        this.speed = new Image("resources/optionScreen/speed.png");
+        this.bomb = new Image("resources/optionScreen/bomb.png");
+        this.back = new Image("resources/optionScreen/return.png");
     }
 
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
         // TODO Auto-generated method stub
         background.draw(0, 0, container.getWidth(), container.getHeight());
-        g.drawString("Appuyer sur F1 pour jouer", 300, 300);
+        g.drawString("Settings ", 350, 10);
+        g.drawImage(this.health, 350, 140);
+        g.drawString(choice == 0 ? "    < " + this.statBonus.get(0) + " >" :     "    " + this.statBonus.get(0),400 , 140);
+        g.drawImage(this.fire, 350, 240);
+        g.drawString(choice == 1 ? "    < " + this.statBonus.get(1) + " >" :     "    " + this.statBonus.get(1),400, 240);
+        g.drawImage(this.speed, 350, 340);
+        g.drawString(choice == 2 ? "    < " + this.statBonus.get(2) + " >" :     "    " + this.statBonus.get(2),400, 340);
+        g.drawImage(this.bomb, 350, 440);
+        g.drawString(choice == 3 ? "    < " + this.statBonus.get(3) + " >" :     "    " + this.statBonus.get(3),400, 440);
+        g.drawString(choice == 4 ? "< " + "Reset default settings" + " >" : "Reset default settings", 540, 550);
+        g.drawImage(this.back, 10, 500);
+        g.drawString("Press right button \n to return menu", 60, 535);
     }
 
     @Override
@@ -40,12 +67,58 @@ public class OptionScreen extends BasicGameState {
         if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
             game.enterState(1, new FadeOutTransition(), new FadeInTransition());
         }
+        
 
     }
 
     @Override
     public void keyReleased(int key, char c) {
       game.enterState(OptionScreen.ID);
+    }
+    
+    @Override
+    public void keyPressed(int key, char c) {
+      switch(key) {
+      case Input.KEY_DOWN:
+    	  if(choice < 4) {
+    		  choice++;
+    	  }
+    	  break;
+      case Input.KEY_UP:
+    	  if(choice > 0) {
+    		  choice--;
+    	  }
+    	  break;
+      case Input.KEY_RIGHT:
+    	  if(choice == 0 && statBonus.get(0)<5) {
+    		  statBonus.set(choice, statBonus.get(choice) + 1);
+    	  } else if(choice == 1 && statBonus.get(1)<13) {
+    		  statBonus.set(choice, statBonus.get(choice) + 1);
+    	  } else if(choice == 2 && statBonus.get(2)<4) {
+    		  statBonus.set(choice, statBonus.get(choice) + 1);
+    	  } else if(choice == 3 && statBonus.get(3)<10) {
+    		  statBonus.set(choice, statBonus.get(choice) + 1);
+    	  } 
+    	  break;
+      case Input.KEY_LEFT:
+    	  if(choice == 0 && statBonus.get(0)>1) {
+    		  statBonus.set(choice, statBonus.get(choice) - 1);
+    	  } else if(choice == 1 && statBonus.get(1)>1) {
+    		  statBonus.set(choice, statBonus.get(choice) - 1);
+    	  } else if(choice == 2 && statBonus.get(2)>0) {
+    		  statBonus.set(choice, statBonus.get(choice) - 1);
+    	  } else if(choice == 3 && statBonus.get(3)>1) {
+    		  statBonus.set(choice, statBonus.get(choice) - 1);
+    	  } 
+    	  break;
+      case Input.KEY_ENTER:
+    	  if(choice == 4) {
+    		  statBonus = new ArrayList<Integer>(Arrays.asList(3,2,0,1));
+    		  System.out.println(defaultStatBonus);
+    	  }
+      break;
+      }
+
     }
 
 
@@ -58,6 +131,27 @@ public class OptionScreen extends BasicGameState {
     public static void main(String[] args) {
         // TODO Auto-generated method stub
 
+    }
+    
+    
+    @Override
+	public void controllerUpPressed(int controller) {
+    	if (choice > 0) {
+			choice--;
+		}
+	}
+    
+    @Override
+	public void controllerDownPressed(int controller) {
+		if (choice < 2) {
+			choice++;
+		}
+	}
+    
+    public void controllerButtonPressed(int controller, int button) {
+    	if (button == 2) {
+    		game.enterState(1, new FadeOutTransition(), new FadeInTransition());
+    	}
     }
 
 }
