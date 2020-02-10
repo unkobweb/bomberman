@@ -21,6 +21,7 @@ import org.newdawn.slick.KeyListener;
 public class MainScreenGameState extends BasicGameState {
    
       public static final int ID = 1;
+      private GameContainer container;
       private Image logo;
       private StateBasedGame game;
       private int choice = 0;
@@ -35,6 +36,7 @@ public class MainScreenGameState extends BasicGameState {
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
         // TODO Auto-generated method stub
         this.game = game;
+        this.container = container;
         this.logo = new Image("resources/img/Super_Bomberman_R_Logo.png");
         try {
 			connect.init();
@@ -150,6 +152,8 @@ public class MainScreenGameState extends BasicGameState {
     	  			break;
     	  		}
     	  		break;
+    	  	case Input.KEY_ESCAPE:
+    	  		container.exit();
     	  }
       }
      

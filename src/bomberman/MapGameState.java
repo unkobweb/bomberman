@@ -24,6 +24,7 @@ public class MapGameState extends BasicGameState {
 	private Hud hud = new Hud();
 	public static boolean gameFinished = false;
 	private boolean goesToScore = false;
+	private static boolean quited = false;
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
@@ -72,6 +73,10 @@ public class MapGameState extends BasicGameState {
 	
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+		if (quited) {
+			this.init(container, game);
+			quited = false;
+		}
 		if (this.gameFinished && this.goesToScore) {
 			this.init(container, game);
 		}
@@ -156,6 +161,7 @@ public class MapGameState extends BasicGameState {
     public void keyPressed(int key, char c) {
         switch (key) {
         case Input.KEY_ESCAPE:
+        	quited = true;
         	game.enterState(1, new FadeOutTransition(), new FadeInTransition());
         }
     }
