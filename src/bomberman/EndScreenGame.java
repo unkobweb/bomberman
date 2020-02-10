@@ -172,8 +172,86 @@ public class EndScreenGame extends BasicGameState {
       }
     	
     }
-
-
+    
+    public void controllerButtonPressed(int controller, int button) {
+    	if (button == 1) {
+    		if (!equality) {
+      			connect.putScore(this.alphabet.get(this.firstLetter)+this.alphabet.get(this.secondLetter)+this.alphabet.get(this.thirdLetter), this.winnerScore);
+      	      	MainScreenGameState.updateLeaderboard();
+      		}
+    		game.enterState(MainScreenGameState.ID, new FadeOutTransition(), new FadeInTransition());
+    	}
+    }
+    
+    @Override
+	public void controllerLeftPressed(int controller) {
+    	if (this.letterChoiced > 0) {
+  			this.letterChoiced--;
+  		}
+	}
+    
+    @Override
+	public void controllerRightPressed(int controller) {
+    	if (this.letterChoiced < 2) {
+  			this.letterChoiced++;
+  		}
+	}
+    
+    @Override
+	public void controllerUpPressed(int controller) {
+    	switch (this.letterChoiced) {
+			case 0:
+				System.out.println("oui");
+				if (this.firstLetter < 25) {
+					this.firstLetter++;
+				} else {
+					this.firstLetter = 0;
+				}
+				break;
+			case 1:
+				if (this.secondLetter < 25) {
+					this.secondLetter++;
+				} else {
+					this.secondLetter = 0;
+				}
+				break;
+			case 2:
+				if (this.thirdLetter < 25) {
+					this.thirdLetter++;
+				} else {
+					this.thirdLetter = 0;
+				}
+				break;
+		}
+	}
+    
+    @Override
+	public void controllerDownPressed(int controller) {
+    	switch (this.letterChoiced) {
+			case 0:
+				if (this.firstLetter > 0) {
+					this.firstLetter--;
+				} else {
+					this.firstLetter = 25;
+				}
+				break;
+			case 1:
+				if (this.secondLetter > 0) {
+					this.secondLetter--;
+				} else {
+					this.secondLetter = 25;
+				}
+				break;
+			case 2:
+				if (this.thirdLetter > 0) {
+					this.thirdLetter--;
+				} else {
+					this.thirdLetter = 25;
+				}
+				break;
+  		}
+	}
+    
   @Override
   public int getID() {
       // TODO Auto-generated method stub

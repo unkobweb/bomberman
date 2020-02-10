@@ -93,7 +93,7 @@ public class OptionScreen extends BasicGameState {
       switch(key) {
       case Input.KEY_ESCAPE:
     	  game.enterState(1, new FadeOutTransition(), new FadeInTransition());
-    	  //this.quited = true;
+    	  this.quited = true;
     	  break;
       case Input.KEY_DOWN:
     	  if(choice < 5) {
@@ -154,20 +154,55 @@ public class OptionScreen extends BasicGameState {
     
     @Override
 	public void controllerUpPressed(int controller) {
-    	if (choice > 0) {
-			choice--;
-		}
+    	if(choice > 0) {
+  		  choice--;
+  	  	}
 	}
     
     @Override
 	public void controllerDownPressed(int controller) {
-		if (choice < 2) {
-			choice++;
-		}
+    	if(choice < 5) {
+  		  choice++;
+  	  }
+	}
+    
+    @Override
+	public void controllerRightPressed(int controller) {
+    	if(choice == 0 && statBonus.get(0)<5) {
+  		  statBonus.set(choice, statBonus.get(choice) + 1);
+  	  	} else if(choice == 1 && statBonus.get(1)<13) {
+  		  statBonus.set(choice, statBonus.get(choice) + 1);
+  	  	} else if(choice == 2 && statBonus.get(2)<4) {
+  		  statBonus.set(choice, statBonus.get(choice) + 1);
+  	  	} else if(choice == 3 && statBonus.get(3)<10) {
+  		  statBonus.set(choice, statBonus.get(choice) + 1);
+  	  	} 
+	}
+    
+    @Override
+	public void controllerLeftPressed(int controller) {
+    	if(choice == 0 && statBonus.get(0)>1) {
+  		  statBonus.set(choice, statBonus.get(choice) - 1);
+  	  	} else if(choice == 1 && statBonus.get(1)>1) {
+  		  statBonus.set(choice, statBonus.get(choice) - 1);
+  	  	} else if(choice == 2 && statBonus.get(2)>0) {
+  		  statBonus.set(choice, statBonus.get(choice) - 1);
+  	  	} else if(choice == 3 && statBonus.get(3)>1) {
+  		  statBonus.set(choice, statBonus.get(choice) - 1);
+  	  	} 
 	}
     
     public void controllerButtonPressed(int controller, int button) {
+    	if (button == 1) {
+    		if(choice == 5) {
+      		  statBonus = new ArrayList<Integer>(Arrays.asList(3,2,0,1));
+      		  System.out.println(defaultStatBonus);
+      	  	} else if(choice == 4) {
+      		  connect.setSettings(statBonus.get(0), statBonus.get(1), statBonus.get(2), statBonus.get(3));
+      	  	}
+    	}
     	if (button == 2) {
+    		this.quited = true;
     		game.enterState(1, new FadeOutTransition(), new FadeInTransition());
     	}
     }
