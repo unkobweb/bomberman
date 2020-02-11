@@ -69,10 +69,6 @@ public class Instructions extends BasicGameState {
   @Override
   public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
       // TODO Auto-generated method stub
-      if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
-          game.enterState(1, new FadeOutTransition(), new FadeInTransition());
-      }
-
   }
 
     @Override
@@ -83,6 +79,13 @@ public class Instructions extends BasicGameState {
     public void controllerButtonPressed(int controller, int button) {
     	if (button == 2) {
     		game.enterState(1, new FadeOutTransition(), new FadeInTransition());
+    	}
+    }
+    
+    public void keyPressed(int key, char c) {
+    	switch (key) {
+    	case Input.KEY_ESCAPE:
+    		game.enterState(MainScreenGameState.ID, new FadeOutTransition(), new FadeInTransition());
     	}
     }
 
