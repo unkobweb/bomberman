@@ -92,10 +92,6 @@ public class EndScreenGame extends BasicGameState {
   @Override
   public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
       // TODO Auto-generated method stub
-      if (container.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
-          game.enterState(1, new FadeOutTransition(), new FadeInTransition());
-      }
-
   }
     
     @Override
@@ -174,12 +170,14 @@ public class EndScreenGame extends BasicGameState {
     }
     
     public void controllerButtonPressed(int controller, int button) {
-    	if (button == 1) {
-    		if (!equality) {
-      			connect.putScore(this.alphabet.get(this.firstLetter)+this.alphabet.get(this.secondLetter)+this.alphabet.get(this.thirdLetter), this.winnerScore);
-      	      	MainScreenGameState.updateLeaderboard();
-      		}
-    		game.enterState(MainScreenGameState.ID, new FadeOutTransition(), new FadeInTransition());
+    	if ((this.winner.equals("P1") && controller == 2) || (this.winner.equals("P2") && controller == 3)) {
+    		if (button == 1) {
+        		if (!equality) {
+          			connect.putScore(this.alphabet.get(this.firstLetter)+this.alphabet.get(this.secondLetter)+this.alphabet.get(this.thirdLetter), this.winnerScore);
+          	      	MainScreenGameState.updateLeaderboard();
+          		}
+        		game.enterState(MainScreenGameState.ID, new FadeOutTransition(), new FadeInTransition());
+        	}
     	}
     }
     
