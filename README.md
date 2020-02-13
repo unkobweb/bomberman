@@ -4,7 +4,7 @@
 ----------
 
 ## Le jeu
-Ce jeu fait affronté 2 joueurs en 1 contre 1 dans un bomberman ou le but est d'éliminer l'adversaire autant de fois qu'il a de vies. Des bonus pourront être ramassés pour vous permettre de mener à bien votre mission plus facilement. Une fois votre adversaire mis au tapis, il vous sera possible de mettre votre magnifique pseudo (3 lettres maximum) pour afficher fièrement votre meilleur score et frimer dans la cours de récré.
+Ce jeu fait affronter 2 joueurs en 1 contre 1 dans un bomberman ou le but est d'éliminer l'adversaire autant de fois qu'il a de vies. Des bonus pourront être ramassés pour vous permettre de mener à bien votre mission plus facilement. Une fois votre adversaire mis au tapis, il vous sera possible de mettre votre magnifique pseudo (3 lettres maximum) pour afficher fièrement votre meilleur score et frimer dans la cours de récré.
 
 *Seuls les gagnants entrent dans le leaderboard !*
 
