@@ -170,7 +170,7 @@ public class EndScreenGame extends BasicGameState {
     }
     
     public void controllerButtonPressed(int controller, int button) {
-    	if ((this.winner.equals("P1") && controller == 2) || (this.winner.equals("P2") && controller == 3)) {
+    	if ((this.winner.equals("P1") && controller == 1) || (this.winner.equals("P2") && controller == 0)) {
     		if (button == 1) {
         		if (!equality) {
           			connect.putScore(this.alphabet.get(this.firstLetter)+this.alphabet.get(this.secondLetter)+this.alphabet.get(this.thirdLetter), this.winnerScore);

@@ -37,18 +37,18 @@ public class MapGameState extends BasicGameState {
 		MapGameState.player.init();
 		MapGameState.player2.init();
 		MapGameState.container.setShowFPS(false);
-		PlayerController controller = new PlayerController(MapGameState.player, 2);
+		PlayerController controller = new PlayerController(MapGameState.player, 1);
 		container.getInput().addKeyListener(controller);
 		container.getInput().addControllerListener(controller);
-		PlayerController controller2 = new PlayerController(MapGameState.player2, 3);
+		PlayerController controller2 = new PlayerController(MapGameState.player2, 0);
 		container.getInput().addKeyListener(controller2);
 		container.getInput().addControllerListener(controller2);
 		MapGameState.container.setShowFPS(false);
-        MapGameState.container.setFullscreen(false);
+        MapGameState.container.setFullscreen(true);
         this.hud.init();
 		
-		/*Music background = new Music("resources/music/music.wav");
-	    background.loop();*/
+		Music background = new Music("resources/music/music.wav");
+	    background.loop();
 	}
 	
 	public static void finishGame() {
