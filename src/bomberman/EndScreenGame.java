@@ -183,21 +183,26 @@ public class EndScreenGame extends BasicGameState {
     
     @Override
 	public void controllerLeftPressed(int controller) {
-    	if (this.letterChoiced > 0) {
-  			this.letterChoiced--;
-  		}
+    	if ((this.winner.equals("P1") && controller == 1) || (this.winner.equals("P2") && controller == 0)) {
+    		if (this.letterChoiced > 0) {
+      			this.letterChoiced--;
+      		}
+    	}
 	}
     
     @Override
 	public void controllerRightPressed(int controller) {
-    	if (this.letterChoiced < 2) {
-  			this.letterChoiced++;
-  		}
+    	if ((this.winner.equals("P1") && controller == 1) || (this.winner.equals("P2") && controller == 0)) {
+    		if (this.letterChoiced < 2) {
+      			this.letterChoiced++;
+      		}
+    	}
 	}
     
     @Override
 	public void controllerUpPressed(int controller) {
-    	switch (this.letterChoiced) {
+    	if ((this.winner.equals("P1") && controller == 1) || (this.winner.equals("P2") && controller == 0)) {
+    		switch (this.letterChoiced) {
 			case 0:
 				System.out.println("oui");
 				if (this.firstLetter < 25) {
@@ -221,11 +226,13 @@ public class EndScreenGame extends BasicGameState {
 				}
 				break;
 		}
+    	}
 	}
     
     @Override
 	public void controllerDownPressed(int controller) {
-    	switch (this.letterChoiced) {
+    	if ((this.winner.equals("P1") && controller == 1) || (this.winner.equals("P2") && controller == 0)) {
+    		switch (this.letterChoiced) {
 			case 0:
 				if (this.firstLetter > 0) {
 					this.firstLetter--;
@@ -248,6 +255,7 @@ public class EndScreenGame extends BasicGameState {
 				}
 				break;
   		}
+    	}
 	}
     
   @Override
